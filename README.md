@@ -35,6 +35,14 @@
 * PUT '/:id', edit one artist
 * DELETE '/:id', delete on artist
 
+## Wireframe
+<details>
+<summary>Click to see Wireframe</summary>
+
+![1](./images/TekkyRoutesPlanner.png)
+
+</details>
+
 
 ## MVP
 
