@@ -39,8 +39,6 @@
 <details>
 <summary>Click to see Wireframe</summary>
 
-![1](./images/TekkyRoutesPlanner.png)
-
 </details>
 
 
