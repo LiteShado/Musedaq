@@ -4,6 +4,12 @@ import { UserContext } from '../contexts/UserContext'
 
 const NavBar = (props) => {
     const [user, setUser] = useContext(UserContext)
+
+    const logout = () => {
+        localStorage.clear()
+        setUser('')
+    }
+
     return(
         <div className="Nav">
         <nav>
@@ -17,6 +23,7 @@ const NavBar = (props) => {
         <Link className="Nav" to="/"
             onClick={() => {
                 localStorage.removeItem('userId')
+                localStorage.clear()
                 setUser('')
             }}
         >Logout</Link>
@@ -31,7 +38,6 @@ const NavBar = (props) => {
         <Link to="/Login">Login</Link>
     </>
     }
-
     </nav>
     </div>
     )
