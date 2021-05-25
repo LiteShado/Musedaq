@@ -7,7 +7,6 @@ import { UserContext } from './contexts/UserContext'
 import { Route, Redirect } from 'react-router-dom'
 
 import Home from './pages/Home'
-import SignUpLogin from './components/SignupLogin'
 import Signup from './pages/Signup'
 import Login from './pages/Login'
 import Artists from './pages/Artists'
@@ -15,7 +14,29 @@ import Label from './pages/Label'
 import Artist from './components/Artist'
 
 function App() {
-  const [user, setUser] = useContext(UserContext)
+
+  const {userState} = useContext(UserContext)
+  const [user,setUser] = userState
+
+  const userInfo = async () => {
+  const id = localStorage.getItem('id')
+
+  console.log(id)
+
+    if(id) {
+      setUser(id)
+      console.log(id)
+    }
+
+    console.log(user)
+
+  }
+
+  useEffect(() => {
+    userInfo()
+  },[])
+
+  console.log(user)
 
   return (
     <div className="App">
