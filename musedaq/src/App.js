@@ -1,11 +1,8 @@
 import './App.css';
-import NavBar from './components/NavBar'
-
-import { useState, useContext } from 'react'
-import { UserContext } from './contexts/UserContext'
-
+import { useContext, useState } from 'react'
+import { UserContext } from './context/UserContext';
 import { Route, Redirect } from 'react-router-dom'
-
+import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import Signup from './pages/Signup'
 import Login from './pages/Login'
@@ -15,33 +12,17 @@ import Artist from './components/Artist'
 
 function App() {
 
-  const {userState} = useContext(UserContext)
-  const [user,setUser] = userState
+  const {userState, verifyUser} = useContext(UserContext)
+  const [user] = userState
 
-  const userInfo = async () => {
-  const id = localStorage.getItem('id')
-
-  console.log(id)
-
-    if(id) {
-      setUser(id)
-      console.log(id)
-    }
-
-    console.log(user)
-
-  }
-
-  useEffect(() => {
-    userInfo()
-  },[])
-
-  console.log(user)
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   return (
     <div className="App">
       <div className="NavBar">
-        <NavBar />
+        <Navbar setName={setName} setEmail={setEmail} setPassword={setPassword} />
       </div>
 
       <Route

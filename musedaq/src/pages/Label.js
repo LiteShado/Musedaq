@@ -2,14 +2,14 @@
 
 import { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
-import { Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import env from 'react-dotenv'
 import {UserContext} from '../context/UserContext'
 
 
 const Label = (props) => {
 
-    const {userState} =useContext(UserContext)
+    const {userState} = useContext(UserContext)
     const [user, setUser] = userState
     const [myArtists, setMyArtists] = useState(null)
 
