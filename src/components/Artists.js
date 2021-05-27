@@ -41,7 +41,7 @@ const Artists = (props) => {
                             <Link to={`/artist/${artist.id}`}>
                                     <h3 className="artist">{artist.name}</h3>
                             </Link>
-                                    <img className="artistPics" src = {artist.image} alt="pic" />
+                                    <img className="artistPics" src= {artist.image} alt="pic" />
                                     <div>
                                     <p className="titles">Bio: </p>
                                     <p className="artistBio">Bio: {artist.biograpy}</p>

@@ -4,13 +4,14 @@ import { UserContext } from '../context/UserContext'
 
 const NavBar = (props) => {
     const [user, setUser] = useContext(UserContext)
+    console.log(user)
 
     return(
         <div className="Nav">
         <nav>
-        <Link className="Nav" to="/">Home</Link>{' | '}
+        {/* <Link className="Nav" to="/">Home</Link>{' | '} */}
 
-    {user ?
+    {user.id ?
     <>
     <div className="navbar">
         <Link className="Nav" to="/allartists">Artists</Link>{' || '}
@@ -30,6 +31,7 @@ const NavBar = (props) => {
     :
 
     <>
+        <Link to="/Home">Home</Link>{' | '}
         <Link to="/Signup">Sign Up</Link>{' | '}
         <Link to="/Login">Login</Link>
     </>

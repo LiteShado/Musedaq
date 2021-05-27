@@ -1,7 +1,8 @@
 import './App.css';
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { UserContext } from './context/UserContext';
 import { Route, Redirect } from 'react-router-dom'
+import axios from 'axios'
 
 import Navbar from './components/Navbar'
 import Home from './pages/Home'
@@ -14,29 +15,30 @@ import Label from './pages/Label'
 
 function App() {
 
-  const [user] = useContext(UserContext)
+  const [user, setUser] = useContext(UserContext)
   // const [user, setUser] = userState
 
-  // const getUserInfo = async () => {
-  //   const userId = localStorage.getItem('userId')
-  //   try {
-  //     let user = await axios.get('http://localhost:3001/users' ,{
-  //     headers:{
-  //       authorization: userId
-  //     }
-  //   })
-  //   if(user.data.user) {
-  //     setUser(user.data)
-  //   }
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
+  const getUserInfo = async () => {
+    const userId = localStorage.getItem('userId')
+    try {
+      let user = await axios.get('http://localhost:3001/users' ,{
+      headers:{
+        authorization: userId
+      }
+    })
+    if(user.data.user) {
+      setUser(user.data)
+    }
+    } catch (error) {
+      console.log(error)
+    }
 
-  // }
+  }
+  console.log(user)
 
-  // useEffect(() => {
-  //   getUserInfo()
-  // },[])
+  useEffect(() => {
+    getUserInfo()
+  },[])
 
   return (
     <div className="App">
@@ -48,7 +50,7 @@ function App() {
        path="/"
        exact
        render={()=>{
-        if(user){
+        if(user.id){
         return <Redirect to ="/allartists" />
         } else {
         return <Home />
@@ -59,7 +61,7 @@ function App() {
       <Route
        path="/signup"
        render={()=>{
-        if(user){
+        if(user.id){
           return <Redirect to ="/allartists" />
         } else {
          return <Signup />
@@ -68,9 +70,20 @@ function App() {
       />
 
       <Route
+       path="/home"
+       render={()=>{
+        if(user.id){
+          return <Redirect to ="/allartists" />
+        } else {
+         return <Home />
+        }
+       }}
+      />
+
+      <Route
        path="/login"
        render={()=>{
-         if(user){
+         if(user.id){
           return <Redirect to ="/allartists" />
          } else{
           return <LoginPage />
