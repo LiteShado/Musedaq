@@ -19,6 +19,11 @@ const SignupLogin = (props) => {
         })
             console.log(`${props.log}`);
             localStorage.setItem('userId', response.data.userId)
+            localStorage.setItem('id', response.data.user.id)
+            localStorage.setItem('email', response.data.user.email)
+            localStorage.setItem('password', response.data.user.password)
+            localStorage.setItem('name', response.data.user.name)
+
             window.location.reload()
     }
 

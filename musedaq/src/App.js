@@ -9,6 +9,7 @@ import Signup from './pages/Signup'
 import LoginPage from './pages/LoginPage'
 import AllArtists from './pages/AllArtists'
 import OneArtist from './pages/OneArtist'
+import MyProfile from './pages/MyProfile'
 import Label from './pages/Label'
 
 function App() {
@@ -100,16 +101,26 @@ function App() {
       />
 
       <Route
-        path="/artist/:id"
-        render={()=>{
-          if(user){
-            return <OneArtist />
-          }else{
-            return <Redirect to ="/" />
-          }
-        }}
+       path="/myprofile"
+       render={()=>{
+         if(user){
+          return <MyProfile />
+         } else{
+          return <Redirect to ="/" />
+         }
+       }}
       />
 
+      <Route
+      path="/artist/:id"
+      render={(routingId)=>{
+         if(user){
+          return <OneArtist id={routingId.match.params.id}/>
+         } else{
+          return <Redirect to ="/" />
+         }
+       }}
+      />
 
     </div>
   );

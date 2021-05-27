@@ -1,23 +1,20 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
 import Artist from '../components/Artist'
 
 
 const OneArtist = (props) => {
-
     const [oneArtist, setOneArtist] = useState({})
-    const {id} = useParams()
 
     const fetchArtist = () => {
         axios.get(`${process.env.REACT_APP_API_URL}/artist/${props.id}`).then((res) => {
 
-            setOneArtist(res)
+            setOneArtist(res.data.artist)
             console.log(res);
         })
 
     }
-    useEffect(fetchArtist, [props.id])
+    useEffect(fetchArtist, [])
 
 
     const signArtist = async (e) =>{
@@ -30,14 +27,40 @@ const OneArtist = (props) => {
            id: artistId,
            labelId: labelId
        })
-        alert('you signed an artist!!');
-        window.location.reload()
+        // alert('you signed an artist!!');
         console.log(signn)
     }
     return(
         <div>
             <h1>Artist Spotlight</h1>
-            <Artist />
+            <div className="artist-container">
+            <div>
+                <h4>This artist is looking for a label!</h4>
+                <div className="artistDetails" key={oneArtist.id}>
+                    <div key={oneArtist.id}>
+                        <div to={`/artist/${oneArtist.id}`}>
+                            <h3>{oneArtist.name}</h3>
+                                <img className="artistPic" src={oneArtist.image} alt="pic" />
+                                <p className="titles">Bio: </p>
+                                <p>{oneArtist.biograpy}</p>
+                                <p className="titles">Marketplace Price: </p>
+                                <p>${oneArtist.price}</p>
+                                <p className="titles">Genre: </p>
+                                <p>{oneArtist.genre}</p>
+                                <p className="titles">Rating: </p>
+                                <p>{oneArtist.rating}</p>
+                                <p className="titles">Label: </p>
+                                <p>{oneArtist.labelId}</p>
+
+                        </div>
+
+                    </div>
+
+                    <button onClick={signArtist} className = "signed">
+                        I wanna sign this artist!</button>
+                </div>
+            </div>
+        </div>
 
 
        </div>

@@ -35,7 +35,6 @@ const Artist = (id) => {
            labelId: labelId
        })
         alert('you signed an artist!!');
-        window.location.reload()
         console.log(signn)
     }
 

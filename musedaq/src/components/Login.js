@@ -6,7 +6,6 @@ import {UserContext} from '../context/UserContext'
 
 
 const Login = (props) => {
-    console.log(props)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [user,setUser] = useContext(UserContext)
@@ -22,7 +21,11 @@ const Login = (props) => {
             console.log(user)
             console.log(response)
             localStorage.setItem('userId', response.data.userId)
-            window.location.reload()
+            localStorage.setItem('id', response.data.user.id)
+            localStorage.setItem('email', response.data.user.email)
+            localStorage.setItem('password', response.data.user.password)
+            localStorage.setItem('name', response.data.user.name)
+            // window.location.reload()
             setUser(response.data.user)
     }
 
