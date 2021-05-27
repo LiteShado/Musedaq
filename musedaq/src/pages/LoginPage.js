@@ -1,13 +1,12 @@
 
 
+import Login from '../components/Login'
 
-import SignupLogin from '../components/SignupLogin'
-
-const Login = (props) => {
+const LoginPage = (props) => {
     return(
         <div>
             <div>
-                <SignupLogin className="input"
+                <Login className="input"
                 buttonText="Log In to Musedaq"
                 route="/users/login"
                 log="Login Successful"
@@ -20,4 +19,4 @@ const Login = (props) => {
 
 
 
-export default Login
+export default LoginPage

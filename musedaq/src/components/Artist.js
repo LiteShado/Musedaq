@@ -1,63 +1,73 @@
+import React from 'react'
+
+import { useParams } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-
-import {useParams} from 'react-router-dom'
 
 
-const Artist = (props) => {
-    const { id } = useParams()
-    const [artist, setArtist] = useState({})
+const Artist = () => {
 
-    const fetchArtist = () => {
-     axios.get(`${process.env.REACT_APP_BACKEND_URL}/artist/${id}`)
-        .then((response) => {
-            setArtist(response.data.artist)
+    const [oneArtist, setOneArtist] = useState([])
+
+    const FetchArtist = async (props) => {
+        console.log(props)
+        let ress = await axios.get(`${process.env.REACT_APP_API_URL}/artist/${props}`, {
+            setOneArtist
         })
-    }
-    useEffect(fetchArtist, [])
+        console.log(ress)
 
-    const signArtist =(e) =>{
-       axios.post(`${process.env.REACT_APP_BACKEND_URL}/artist/${id}`,
-       {},
-       {
-           headers:{
-               Authorization: localStorage.getItem('userId')
-           }
-       })
-       .then((response)=>{
-       })
-   }
+        // const foundArtist = ress.data.artist
+        // setOneArtist(foundArtist)
 
-    return(
-        <div className="artist-container">
-        {
-            artist ?
-            <>
-             <div className="artistDetails" key={artist.id}>
-                    <h3>{artist.name}</h3>
-                    <img className="artistPic" src={artist.image} alt="pic" />
-                    <div>
-                    <p>{artist.biograpy}</p>
-                    </div>
-                    <p>{artist.price}</p>
-                    <div>
-                    <p>{artist.genre}</p>
-                    </div>
-                    <p>{artist.rating}</p>
-            </div>
-
-            <button className="SignThisArtist" onClick={signArtist}>I wanna sign this artist!</button>
-            <Link to="/Artists">previous page</Link>
-            </>
-            :
-            <p>Loading...</p>
         }
+
+        useEffect(() => {
+            FetchArtist()
+        }, [])
+
+
+    const signArtist = async (e) =>{
+
+        e.preventDefault()
+        let artistId = oneArtist.id
+        let labelId = localStorage.getItem('labelId')
+
+        let signn = await axios.put(`${process.env.REACT_APP_API_URL}/artist/signed`, {
+           id: artistId,
+           labelId: labelId
+       })
+        alert('you signed an artist!!');
+        window.location.reload()
+        console.log(signn)
+    }
+
+
+    return (
+        <div className="artist-container">
+            <div>
+                <div className="artistDetails" key={oneArtist.id}>
+                    <div key={oneArtist.id}>
+
+                        <div to={`/artist/${oneArtist.id}`}>
+                            <h3>{oneArtist.name}</h3>
+                                <img className="artistPic" src={oneArtist.image} alt="pic" />
+                                <p>{oneArtist.biograpy}</p>
+                                <p>{oneArtist.price}</p>
+                                <p>{oneArtist.genre}</p>
+                                <p>{oneArtist.rating}</p>
+                        </div>
+
+                    </div>
+
+                    <button onClick={signArtist} className = "signed">
+                        I wanna sign this artist!</button>
+                </div>
+            </div>
         </div>
     )
-}
 
+}
 
 
 export default Artist

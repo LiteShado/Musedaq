@@ -1,33 +1,34 @@
 import axios from 'axios'
 import env from 'react-dotenv'
-import { useState } from 'react'
+import {useContext, useState} from 'react'
+import {UserContext} from '../context/UserContext'
 
 
-const SignupLogin = (props) => {
-    const [name, setName] = useState('')
+
+const Login = (props) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [user,setUser] = useContext(UserContext)
 
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        let response = await axios.post(`${process.env.REACT_APP_API_URL}/users/signup`, {
-            name,
+        let response = await axios.post(`${process.env.REACT_APP_API_URL}/users/login`, {
             email,
             password
         })
             console.log(`${props.log}`);
+            console.log(user)
+            console.log(response)
             localStorage.setItem('userId', response.data.userId)
             window.location.reload()
+            setUser(response.data.user)
     }
 
     return (
         <div className="signuplogin">
         <h1>{props.title}</h1>
         <form onSubmit={handleSubmit}>
-
-            <label htmlFor="new-name"><h2>name</h2></label>
-            <input value={name} onChange={(e)=> {setName(e.target.value) }} />
 
             <label htmlFor="new-email"><h2>email</h2></label>
             <input value={email} onChange={(e)=> {setEmail(e.target.value) }} />
@@ -44,4 +45,4 @@ const SignupLogin = (props) => {
 
 
 
-export default SignupLogin
+export default Login
