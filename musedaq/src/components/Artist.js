@@ -1,21 +1,18 @@
-import React from 'react'
-
-import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+
 import axios from 'axios'
 
 
 
-const Artist = () => {
-
+const Artist = (id) => {
+    console.log(id)
     const [oneArtist, setOneArtist] = useState([])
 
-    const FetchArtist = async (props) => {
-        console.log(props)
-        let ress = await axios.get(`${process.env.REACT_APP_API_URL}/artist/${props}`, {
+    const FetchArtist = async () => {
+        let ress = await axios.get(`${process.env.REACT_APP_API_URL}/artist/${id}`, {
             setOneArtist
         })
-        console.log(ress)
+        // console.log(ress)
 
         // const foundArtist = ress.data.artist
         // setOneArtist(foundArtist)
@@ -46,9 +43,9 @@ const Artist = () => {
     return (
         <div className="artist-container">
             <div>
+                <h4>This artist is looking for a label!</h4>
                 <div className="artistDetails" key={oneArtist.id}>
                     <div key={oneArtist.id}>
-
                         <div to={`/artist/${oneArtist.id}`}>
                             <h3>{oneArtist.name}</h3>
                                 <img className="artistPic" src={oneArtist.image} alt="pic" />

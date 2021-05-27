@@ -6,6 +6,7 @@ import {UserContext} from '../context/UserContext'
 
 
 const Login = (props) => {
+    console.log(props)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [user,setUser] = useContext(UserContext)

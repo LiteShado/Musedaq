@@ -14,7 +14,7 @@ const NavBar = (props) => {
     <>
     <div className="navbar">
         <Link className="Nav" to="/allartists">Artists</Link>{' || '}
-        <Link className="Nav" to="/mylabel">My Label</Link>{' || '}
+        <Link className="Nav" to="/label">My Label</Link>{' || '}
         <Link className="Nav" to="/"
             onClick={() => {
                 localStorage.removeItem('userId')

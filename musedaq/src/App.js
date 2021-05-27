@@ -89,7 +89,7 @@ function App() {
       />
 
       <Route
-       path="/Label"
+       path="/label"
        render={()=>{
          if(user){
           return <Label />
@@ -100,7 +100,7 @@ function App() {
       />
 
       <Route
-        path="/artist"
+        path="/artist/:id"
         render={()=>{
           if(user){
             return <OneArtist />

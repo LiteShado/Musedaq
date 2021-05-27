@@ -4,6 +4,7 @@ import axios from 'axios'
 
 
 const Artists = (props) => {
+    console.log(props)
     const [allArtists, setAllArtists] = useState([])
 
     const FetchAllArtists = async () => {
@@ -31,12 +32,11 @@ const Artists = (props) => {
     return(
         <div className="allArtists">
             <h2>Official Musedaq Directory</h2>
-        <div>
         {
             allArtists.length ?
             allArtists.map((artist) => {
-                return <div key={artist.id}
-                            className="artists">
+                return<div key={artist.id}>
+
                             <div>
                             <Link to={`/artist/${artist.id}`}>
                                     <h3 className="artist">{artist.name}</h3>
@@ -59,13 +59,12 @@ const Artists = (props) => {
                                     <div className = "divider"> __________________
                                     __________________
                                     </div>
-                                </div>
+                            </div>
                         </div>
               })
               :
               <p>Loading...</p>
           }
-      </div>
       </div>
     )
 }
