@@ -1,5 +1,4 @@
 import axios from 'axios'
-import env from 'react-dotenv'
 import {useContext, useState} from 'react'
 import {UserContext} from '../context/UserContext'
 

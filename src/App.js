@@ -19,13 +19,13 @@ function App() {
   // const [user, setUser] = userState
 
   const getUserInfo = async () => {
-    const userId = localStorage.getItem('userId')
+
+    const id = localStorage.getItem('id')
     try {
-      let user = await axios.get('http://localhost:3001/users' ,{
-      headers:{
-        authorization: userId
+      let user = await axios.post(`${process.env.REACT_APP_API_URL}/users/profile` ,{
+              id: id
       }
-    })
+    )
     if(user.data.user) {
       setUser(user.data)
     }
@@ -38,7 +38,7 @@ function App() {
 
   useEffect(() => {
     getUserInfo()
-  },[])
+  }, [])
 
   return (
     <div className="App">
@@ -94,7 +94,7 @@ function App() {
       <Route
        path="/allartists"
        render={()=>{
-         if(user){
+         if(user.id){
           return <AllArtists />
          } else{
           return <Redirect to ="/" />
@@ -105,10 +105,10 @@ function App() {
       <Route
        path="/label"
        render={()=>{
-         if(user){
+         if(user.id){
           return <Label />
          } else{
-          return <Redirect to ="/" />
+          return <Redirect to ="/Label" />
          }
        }}
       />
@@ -116,10 +116,10 @@ function App() {
       <Route
        path="/myprofile"
        render={()=>{
-         if(user){
+         if(user.id){
           return <MyProfile />
          } else{
-          return <Redirect to ="/" />
+          return <Redirect to ="/myprofile" />
          }
        }}
       />

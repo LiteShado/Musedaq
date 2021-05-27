@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-
+import env from 'react-dotenv'
 
 
 const MyProfile = (props) => {
@@ -12,6 +12,9 @@ const MyProfile = (props) => {
     const name = localStorage.getItem('name')
     const email = localStorage.getItem('email')
 
+    const [newName,setNewName] = useState('')
+    const [newEmail,setNewEmail] = useState('')
+    const [newProfile, setNewProfile] = useState('')
     console.log(id)
 
     const fetchProfile= async () =>{
@@ -21,7 +24,6 @@ const MyProfile = (props) => {
             })
             console.log(response)
             setUser(response.data.user)
-            console.log(user)
 
         } catch (error) {
             console.log({error});
@@ -32,24 +34,21 @@ const MyProfile = (props) => {
         fetchProfile()
     }, [])
 
-    const [newName,setNewName] = useState('')
-    const [newEmail,setNewEmail] = useState('')
-    const [newProfile, setNewProfile] = useState('')
+
 
     const editSubmit = async (e) => {
         let newPassword = localStorage.getItem('password')
         // let newEmail = localStorage.getItem('email')
         try {
-            let ress = await axios.put(`${process.env.REACT_APP_API_URL}/users/edit`, {
-                name: newName,
-                email: newEmail,
-                password: newPassword
-            })
+        let ress = await axios.put(`${process.env.REACT_APP_API_URL}/users/edit`, {
+            name: newName,
+            email: newEmail,
+            password: newPassword
+        })
             setNewProfile(ress)
             console.log(ress)
-            localStorage.setItem('name', newName)
-            localStorage.setItem('email', newEmail)
-            console.log(newProfile)
+            localStorage.setItem('name', name)
+            localStorage.setItem('email', email)
 
 
         } catch (error) {
@@ -89,11 +88,11 @@ const MyProfile = (props) => {
 
                 <h1>Edit Your Profile </h1>
                     <form onSubmit={editSubmit}>
-                        <input name="name" placeholder={name} type="text" value={name} onChange={(e) => setNewName(e.target.value)} />
+                        <input name="name" placeholder="Name" type="hidden" value={name} onChange={(e) => setNewName(e.target.value)} />
 
                         <input name="newName" placeholder="New Name" type="text" value={newName} onChange={(e) => setNewName(e.target.value)} />
 
-                        <input name="email" placeholder="Email" type="text" value={email} onChange={(e) => setNewEmail(e.target.value)} />
+                        <input name="email" placeholder="Email" type="hidden" value={email} onChange={(e) => setNewEmail(e.target.value)} />
 
                         <input name="newEmail" placeholder="New Email" type="text" value={newEmail} onChange={(e) => setNewEmail(e.target.value)} />
 

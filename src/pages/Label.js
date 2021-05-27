@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import env from 'react-dotenv'
+import MyLabel from '../pages/MyLabel'
 
 
 const MyProfile = (props) => {
@@ -10,9 +10,9 @@ const MyProfile = (props) => {
     let id = localStorage.getItem('id')
     const labelName = localStorage.getItem('labelName')
 
-    const [newLabel,setNewLabel] = useState(null)
-    const [myLabel,setMyLabel] = useState(null)
-    const [newLabelMade, setNewLabelMade] = useState(null)
+    const [newLabel,setNewLabel] = useState('')
+    const [myLabel,setMyLabel] = useState('')
+    const [newLabelMade, setNewLabelMade] = useState('')
     console.log(id)
 
     const createLabel = async (e) => {
@@ -34,23 +34,23 @@ const MyProfile = (props) => {
         }
     }
 
-    // const fetchLabel= async () =>{
-    //     try {
-    //         let response = await axios.post(`${process.env.REACT_APP_API_URL}/label/mylabel`,{
-    //             userId: id
-    //         })
-    //         console.log(response)
-    //         setMyLabel(response.data.user)
-    //         console.log(myLabel)
+    const fetchLabel= async () =>{
+        try {
+            let response = await axios.post(`${process.env.REACT_APP_API_URL}/label/mylabel`,{
+                userId: id
+            })
+            console.log(response)
+            setMyLabel(response.data.user)
+            console.log(myLabel)
 
-    //     } catch (error) {
-    //         console.log({error});
-    //     }
-    // }
+        } catch (error) {
+            console.log({error});
+        }
+    }
 
-    // useEffect(() => {
-    //     fetchLabel()
-    // }, [])
+    useEffect(() => {
+        fetchLabel()
+    }, [])
 
 
 
@@ -86,15 +86,8 @@ const MyProfile = (props) => {
                     <input type="submit" value="submit"/>
                     </form>
 
-                    {/* <h1>My Label</h1>
-                    <div className="userDetails" key={user.id}>
-                            <p className="titles">Name: </p>
-                            <p>{user.name}</p>
-                            <p className="titles">Email: </p>
-                            <p>{user.email}</p>
-                            <p className="titles">Label: </p>
-                            <p>{user.labelId}</p>
-                    </div> */}
+                    <MyLabel/>
+
                     <h3> Delete My Label </h3>
                     <form onSubmit={handleDelete}>
 

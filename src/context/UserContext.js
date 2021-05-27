@@ -6,14 +6,16 @@ const UserProvider = (props) => {
     const [user, setUser] = useState({})
 
     const fetchUser = () => {
-        if (!localStorage.getItem('userId')) { return }
+        if (!localStorage.getItem('id')) { return }
+        let id = localStorage.getItem('id')
 
-        axios.get(`${process.env.REACT_APP_API_URL}/users/verify`, {
-            headers: {
-                Authorization: localStorage.getItem('userId')
-            }
+        axios.post(`${process.env.REACT_APP_API_URL}/users/profile`, {
+
+                id: id
+
         }).then((response) => {
             setUser(response.data.user)
+            console.log(response)
         })
     }
 
