@@ -22,9 +22,11 @@ const Artists = (props) => {
 
     }
 
-    const findGenre = async () => {
+    const findGenre = async (e) => {
+        e.preventDefault()
+        let foundGenre = genre
         let genreSearch = await axios.get(`${process.env.REACT_APP_API_URL}/genre/search`, {
-        setGenre
+                genre: foundGenre
     })
     console.log(genreSearch)
     setAllArtists(genreSearch)
