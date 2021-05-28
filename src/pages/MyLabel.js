@@ -8,20 +8,20 @@ const MyLabel = (props) => {
 
     let id = localStorage.getItem('id')
 
-    const [myLabel,setMyLabel] = useState('')
+    const [myLabels,setMyLabels] = useState('')
     const [myArtists,setMyArtists] = useState('')
     console.log(id)
 
     const fetchLabel= async () =>{
         console.log(id)
         try {
-            let response = await axios.post(`${process.env.REACT_APP_API_URL}/label/mylabel`,{
+            let response = await axios.post(`${process.env.REACT_APP_API_URL}/label/mylabels`,{
                 userId: id
             })
             console.log(response)
-            setMyLabel(response.data.userLabel)
-            localStorage.setItem('theLabelId', response.data.userLabel.id)
-            localStorage.setItem('labelName', response.data.userLabel.name)
+            setMyLabels(response.data)
+            // localStorage.setItem('theLabelId', response.data.userLabel.id)
+            // localStorage.setItem('labelName', response.data.userLabel.name)
 
         } catch (error) {
             console.log({error});
@@ -49,33 +49,50 @@ const MyLabel = (props) => {
 
 
 
-    const handleDelete = async () => {
-        let userId = localStorage.getItem('userId')
-        try {
-            let resss = await axios.delete(`${process.env.REACT_APP_API_URL}/label/delete`, {
-            headers: {
-                authorization: userId
-            }
-        })
-        console.log(resss)
-        localStorage.clear()
+    // const handleDelete = async () => {
+    //     let userId = localStorage.getItem('userId')
+    //     try {
+    //         let resss = await axios.delete(`${process.env.REACT_APP_API_URL}/label/delete`, {
+    //         headers: {
+    //             authorization: userId
+    //         }
+    //     })
+    //     console.log(resss)
+    //     localStorage.clear()
 
-        } catch (error) {
-            console.log(error)
-        }
-    }
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
 
     return(
-        <div>
+            <div>
 
-                    <h1>My Label</h1>
-                    <div className="userDetails" key={myLabel.id}>
-                            <p className="titles">Name: </p>
-                            <p>{myLabel.name}</p>
+                <h1>My Labels</h1>
+                    <div className="userDetails" key={myLabels.id}>
+
+                            {/* <p>{myLabel.name}</p> */}
+                            {/* </div> */}
+
+                        <div>
+                                {
+                                myLabels.length ?
+                                myLabels.map((data) => {
+                                return<div>
+                                    <p>{data.name}</p>
+                                </div>
+                                }
+                                )
+                                :
+                                <p>{myLabels.name}</p>
+                                }
+
+                        </div>
                     </div>
 
+
                     <div className="labelDetails" key={myArtists.id}>
-                            <p className="artists">My Artists </p>
+                            <h2 className="artists"> My Artists </h2>
                             <p>{myArtists.name}</p>
                     </div>
                     {/* <h3> Delete My Label </h3>
@@ -83,8 +100,7 @@ const MyLabel = (props) => {
 
                     <button type="submit" value="submit">delete</button>
                     </form> */}
-
-       </div>
+            </div>
     )
 }
 

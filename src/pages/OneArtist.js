@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import Artist from '../components/Artist'
+// import Artist from '../components/Artist'
 
 
 const OneArtist = (props) => {
@@ -12,23 +12,25 @@ const OneArtist = (props) => {
         axios.get(`${process.env.REACT_APP_API_URL}/artist/${props.id}`).then((res) => {
 
             setOneArtist(res.data.artist)
-            console.log(res);
+            console.log(oneArtist);
+            console.log(oneArtist.labelId)
         })
 
     }
 
-    let id = localStorage.getItem('id')
+    // let id = localStorage.getItem('id')
+    let labelIdNum = oneArtist.labelId
+    let id = labelIdNum
 
     const FetchLabelName = async () => {
         console.log(id)
         try {
-            let response = await axios.post(`${process.env.REACT_APP_API_URL}/label/mylabel`,{
-                userId: id
+            let response = await axios.post(`${process.env.REACT_APP_API_URL}/label/mylabelname`,{
+                id
             })
             console.log(response)
-            setLabelTitle(response.data.userLabel.name)
-            localStorage.setItem('theLabelId', response.data.userLabel.id)
-            localStorage.setItem('labelName', response.data.userLabel.name)
+            setLabelTitle(response.data.userLabelName.name)
+            console.log(labelTitle)
 
         } catch (error) {
             console.log({error});

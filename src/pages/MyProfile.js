@@ -11,6 +11,8 @@ const MyProfile = (props) => {
     let id = localStorage.getItem('id')
     const name = localStorage.getItem('name')
     const email = localStorage.getItem('email')
+    const [myLabels,setMyLabels] = useState('')
+
 
     console.log(id)
 
@@ -21,15 +23,31 @@ const MyProfile = (props) => {
             })
             console.log(response)
             setUser(response.data.user)
-            console.log(user)
 
         } catch (error) {
             console.log({error});
         }
     }
 
+    const fetchLabel= async () =>{
+        try {
+            let response = await axios.post(`${process.env.REACT_APP_API_URL}/label/mylabels`,{
+                userId: id
+            })
+            console.log(response.data)
+
+            setMyLabels(response.data)
+            console.log(myLabels)
+
+        } catch (error) {
+            console.log({error});
+        }
+
+    }
+
     useEffect(() => {
         fetchProfile()
+        fetchLabel()
     }, [])
 
     const [newName,setNewName] = useState('')
@@ -74,19 +92,34 @@ const MyProfile = (props) => {
         }
     }
 
-    return(
+    return (
         <div>
+        {/* {
+        myLabel.length ?
+            myLabel.map((name) => {
+        return<div> */}
             <h2>My Profile</h2>
                 <div className="userDetails" key={user.id}>
-                                <p className="titles">Name: </p>
+                                <h3 className="titles">Name: </h3>
                                 <p>{user.name}</p>
-                                <p className="titles">Email: </p>
+                                <h3 className="titles">Email: </h3>
                                 <p>{user.email}</p>
-                                <p className="titles">Label: </p>
-                                <p>{user.labelId}</p>
-                </div>
+                                <h3 className="titles">Labels: </h3>
 
+            <div>
+                {
+                myLabels.length ?
+                    myLabels.map((data) => {
+                return<div>
+                                <p>{data.name}</p>
+            </div>
+                    }
+                    )
+            :
+            <p>{myLabels.name}</p>
+            }
 
+        </div>
                 <h1>Edit Your Profile </h1>
                     <form onSubmit={editSubmit}>
                         <input name="name" placeholder={name} type="text" value={name} onChange={(e) => setNewName(e.target.value)} />
@@ -106,8 +139,10 @@ const MyProfile = (props) => {
                     <button type="submit" value="submit">delete</button>
                 </form>
 
-       </div>
+            </div>
+    </div>
     )
+
 }
 
 
