@@ -52,7 +52,7 @@ const MyLabel = (props) => {
     const removeArtist = async () => {
         console.log(myArtists.id)
         try {
-            let resss = await axios.put(`${process.env.REACT_APP_API_URL}/artist/unsign`, {
+            let resss = await axios.put(`${process.env.REACT_APP_API_URL}/artist/unsigned`, {
             where: {
                 id: myArtists.id
             }
@@ -67,21 +67,19 @@ const MyLabel = (props) => {
 
 
 
-    const handleDelete = async () => {
-        let i
+    const handleDelete = async (idi) => {
+        // let i
         console.log(myLabels)
 
-        for (i = 0; i<myLabels.length; i++) {
-            console.log(myLabels[i].id)
-            setThisId(myLabels[i].id)
-            let idi = (myLabels[i].id)
+        // for (i = 0; i<myLabels.length; i++) {
+        //     console.log(myLabels[i].id)
+        //     setThisId(myLabels[i].id)
+        //     let idi = (myLabels[i].id)
 
         try {
-            console.log(idi)
-            let resss = await axios.delete(`${process.env.REACT_APP_API_URL}/label/delete`, {
-            where: {
-                id: idi
-            }
+            console.log(id)
+            let resss = await axios.post(`${process.env.REACT_APP_API_URL}/label/delete`, {
+                idi: idi
         })
         console.log(resss)
 
@@ -89,7 +87,7 @@ const MyLabel = (props) => {
             console.log(error)
         }
     }
-    }
+
 
     return(
             <div className="background">
@@ -102,15 +100,16 @@ const MyLabel = (props) => {
 
                         <div>
                                 {
-                                myLabels.length ?
+                                // myLabels.length ?
+                                myLabels &&
                                 myLabels.map((data) => {
                                 return<div>
-                                    <p>{data.name} <button onClick={handleDelete}>Delete</button></p>
+                                    <p>{data.name} <button onClick={() =>handleDelete(data.id)}>Delete</button></p>
                                 </div>
                                 }
                                 )
-                                :
-                                <p>{myLabels.name} <button onClick={handleDelete} value={thisId}>Delete</button></p>
+                                // :
+                                // <p>{myLabels.name} <button onClick={handleDelete(data.id)}>Delete</button></p>
                                 }
 
                         </div>
