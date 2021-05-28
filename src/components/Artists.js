@@ -7,6 +7,8 @@ const Artists = (props) => {
     console.log(props)
     const [allArtists, setAllArtists] = useState([])
     const [labelTitle, setLabelTitle] = useState('')
+    const [genre,setGenre] = useState('')
+
 
     const FetchAllArtists = async () => {
         let response = await axios.get(`${process.env.REACT_APP_API_URL}/artist`, {
@@ -18,7 +20,14 @@ const Artists = (props) => {
     const array = response.data.artist
     setAllArtists(array)
 
+    }
 
+    const findGenre = async () => {
+        let genreSearch = await axios.get(`${process.env.REACT_APP_API_URL}/genre/search`, {
+        setGenre
+    })
+    console.log(genreSearch)
+    setAllArtists(genreSearch)
     }
 
     let id = localStorage.getItem('id')
@@ -55,6 +64,27 @@ const Artists = (props) => {
     return(
         <div className="allArtists">
             <h2>Official Musedaq Directory</h2>
+
+            <form onSubmit={findGenre}>
+
+            <label for="genre">Choose your Genre:</label>
+
+            <select name="genre" value={genre} onChange={(e) => setGenre(e.target.value)}>
+                        <option>Select Genre</option>
+                        <option name="HipHop" value="HipHop">Hip Hop</option>
+                        <option value="Rap" name="Rap">Rap</option>
+                        <option value="Pop" name="Pop">Pop</option>
+                        <option value="RnB" name="RnB">RnB</option>
+                        <option value="Acoustic" name="Acoustic">Acoustic</option>
+                        <option value="EDM" name="EDM">EDM</option>
+                        <option value="Country" name="Country">Country</option>
+                        <option value="Rock" name="Rock">Rock</option>
+
+            </select>
+                        <button>
+                        Search</button>
+            </form>
+
         {
             allArtists.length ?
             allArtists.map((artist) => {
