@@ -42,7 +42,6 @@ const Artist = (id) => {
     return (
         <div className="artist-container">
             <div>
-                <h4>This artist is looking for a label!</h4>
                 <div className="artistDetails" key={oneArtist.id}>
                     <div key={oneArtist.id}>
                         <div to={`/artist/${oneArtist.id}`}>

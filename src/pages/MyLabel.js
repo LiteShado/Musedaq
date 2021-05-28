@@ -4,11 +4,12 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 
-const MyProfile = (props) => {
+const MyLabel = (props) => {
 
     let id = localStorage.getItem('id')
 
     const [myLabel,setMyLabel] = useState('')
+    const [myArtists,setMyArtists] = useState('')
     console.log(id)
 
     const fetchLabel= async () =>{
@@ -34,7 +35,7 @@ const MyProfile = (props) => {
                 userId: id
             })
             console.log(response)
-            setMyLabel(response.data.userLabel)
+            setMyArtists(response.data.userLabel)
 
         } catch (error) {
             console.log({error});
@@ -72,6 +73,11 @@ const MyProfile = (props) => {
                             <p className="titles">Name: </p>
                             <p>{myLabel.name}</p>
                     </div>
+
+                    <div className="labelDetails" key={myArtists.id}>
+                            <p className="artists">My Artists </p>
+                            <p>{myArtists.name}</p>
+                    </div>
                     {/* <h3> Delete My Label </h3>
                     <form onSubmit={handleDelete}>
 
@@ -84,4 +90,4 @@ const MyProfile = (props) => {
 
 
 
-export default MyProfile
+export default MyLabel

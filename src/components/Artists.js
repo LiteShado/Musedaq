@@ -6,6 +6,7 @@ import axios from 'axios'
 const Artists = (props) => {
     console.log(props)
     const [allArtists, setAllArtists] = useState([])
+    const [labelTitle, setLabelTitle] = useState('')
 
     const FetchAllArtists = async () => {
         let response = await axios.get(`${process.env.REACT_APP_API_URL}/artist`, {
@@ -17,14 +18,36 @@ const Artists = (props) => {
     const array = response.data.artist
     setAllArtists(array)
 
+
+    }
+
+    let id = localStorage.getItem('id')
+
+    const FetchLabelName = async () => {
+        console.log(id)
+        try {
+            let response = await axios.post(`${process.env.REACT_APP_API_URL}/label/mylabel`,{
+                userId: id
+            })
+            console.log(response)
+            setLabelTitle(response.data.userLabel.name)
+            localStorage.setItem('theLabelId', response.data.userLabel.id)
+            localStorage.setItem('labelName', response.data.userLabel.name)
+
+        } catch (error) {
+            console.log({error});
+        }
+    }
+
     // for (i = 0; i<array.length; i++) {
     //     console.log(array[i].artist)
     //     // setLyric(array[i].lyric)
     //     console.log(artist)
-    }
+
 
     useEffect(() => {
         FetchAllArtists()
+        FetchLabelName()
 }, [])
 
 
@@ -55,7 +78,7 @@ const Artists = (props) => {
                                     <p className="titles">Rating: </p>
                                     <p>{artist.rating}</p>
                                     <p className="titles">Label: </p>
-                                    <p>{artist.labelId}</p>
+                                    <p>{artist.label}</p>
                                     <div className = "divider"> __________________
                                     __________________
                                     </div>

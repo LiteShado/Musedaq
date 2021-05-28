@@ -5,6 +5,8 @@ import Artist from '../components/Artist'
 
 const OneArtist = (props) => {
     const [oneArtist, setOneArtist] = useState({})
+    const [labelTitle, setLabelTitle] = useState('')
+
 
     const fetchArtist = () => {
         axios.get(`${process.env.REACT_APP_API_URL}/artist/${props.id}`).then((res) => {
@@ -14,7 +16,30 @@ const OneArtist = (props) => {
         })
 
     }
-    useEffect(fetchArtist, [])
+
+    let id = localStorage.getItem('id')
+
+    const FetchLabelName = async () => {
+        console.log(id)
+        try {
+            let response = await axios.post(`${process.env.REACT_APP_API_URL}/label/mylabel`,{
+                userId: id
+            })
+            console.log(response)
+            setLabelTitle(response.data.userLabel.name)
+            localStorage.setItem('theLabelId', response.data.userLabel.id)
+            localStorage.setItem('labelName', response.data.userLabel.name)
+
+        } catch (error) {
+            console.log({error});
+        }
+    }
+    // useEffect(fetchArtist, [])
+
+    useEffect(() => {
+        fetchArtist()
+        FetchLabelName()
+}, [])
 
 
     const signArtist = async (e) =>{
@@ -35,7 +60,6 @@ const OneArtist = (props) => {
             <h1>Artist Spotlight</h1>
             <div className="artist-container">
             <div>
-                <h4>This artist is looking for a label!</h4>
                 <div className="artistDetails" key={oneArtist.id}>
                     <div key={oneArtist.id}>
                         <div to={`/artist/${oneArtist.id}`}>
@@ -50,7 +74,7 @@ const OneArtist = (props) => {
                                 <p className="titles">Rating: </p>
                                 <p>{oneArtist.rating}</p>
                                 <p className="titles">Label: </p>
-                                <p>{oneArtist.labelId}</p>
+                                <p>{labelTitle}</p>
 
                         </div>
 

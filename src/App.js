@@ -10,6 +10,7 @@ import Signup from './pages/Signup'
 import LoginPage from './pages/LoginPage'
 import AllArtists from './pages/AllArtists'
 import OneArtist from './pages/OneArtist'
+import MyLabel from './pages/MyLabel'
 import MyProfile from './pages/MyProfile'
 import Label from './pages/Label'
 
@@ -106,12 +107,18 @@ function App() {
        path="/label"
        render={()=>{
          if(user.id){
-          return <Label />
+          return <MyLabel />
          } else{
           return <Redirect to ="/Label" />
          }
        }}
       />
+
+      <Route
+       exact
+       path="/newlabel">
+      <Label />
+      </Route>
 
       <Route
        path="/myprofile"

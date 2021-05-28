@@ -86,7 +86,7 @@ const MyProfile = (props) => {
                     <input type="submit" value="submit"/>
                     </form>
 
-                    <MyLabel/>
+                    {/* <MyLabel/> */}
 
                     <h3> Delete My Label </h3>
                     <form onSubmit={handleDelete}>
