@@ -143,7 +143,7 @@ const MyProfile = (props) => {
                 <h3> Delete My Profile </h3>
                     <form onSubmit={handleDelete}>
 
-                    <button type="submit" value="submit">delete</button>
+                    <button className="button" type="submit" value="submit">delete</button>
                 </form>
 
             </div>

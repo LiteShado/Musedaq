@@ -31,6 +31,13 @@ body {
   width: 35%;
   height: 35%;
   border: 3px solid black;
+  transition: transform .3s;
+}
+
+img:hover {
+  transform: scale(1.4) rotate(5deg) skew(3deg);
+  border: 5px solid #60ab9a;
+  box-shadow: 2px;
 }
 
 .bio {
@@ -216,6 +223,7 @@ a:hover {
 
 p {
 	font-family: Poppins-Regular;
+  overflow-wrap: break-word;
 	font-size: 17px;
   font-weight:800;
 	line-height: 1.0;

@@ -14,19 +14,19 @@ const Home = (props) => {
                 <marquee class="ticker">
                     <div class="ticker">
                     <div class="ticker__item">INVB | Hip Hop</div>
-                    <div class="ticker__item percent">^2.1%</div>
+                    <div class="ticker__item percent">⇧2.1%</div>
                     <div class="ticker__item">TARA | Pop </div>
-                    <div class="ticker__item percent">^5.7%</div>
+                    <div class="ticker__item percent">⇧5.7%</div>
                     <div class="ticker__item">PP | RnB </div>
-                    <div class="ticker__item percentdown">`1.7%</div>
+                    <div class="ticker__item percentdown">⇩1.7%</div>
                     <div class="ticker__item">SS | Pop </div>
-                    <div class="ticker__item percenthigh">^8.9%</div>
+                    <div class="ticker__item percenthigh">⇧8.9%</div>
                     <div class="ticker__item">XZ | Pop </div>
-                    <div class="ticker__item percent">^4.7%</div>
+                    <div class="ticker__item percent">⇧4.7%</div>
                     <div class="ticker__item">RBOI | Rap </div>
-                    <div class="ticker__item percentdown">`3.7%</div>
+                    <div class="ticker__item percentdown">⇩3.7%</div>
                     <div class="ticker__item">ISHN | RnB </div>
-                    <div class="ticker__item percenthigh">^7.7%</div>
+                    <div class="ticker__item percenthigh">⇧7.7%</div>
                     </div>
                 </marquee>
         </div>

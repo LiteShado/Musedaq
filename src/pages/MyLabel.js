@@ -92,7 +92,7 @@ const MyLabel = (props) => {
     return(
             <div className="background">
 
-                <h1>My Labels</h1>
+                <h2>My Labels</h2>
                     <div className="userDetails" key={myLabels.id}>
 
                             {/* <p>{myLabel.name}</p> */}
@@ -104,7 +104,7 @@ const MyLabel = (props) => {
                                 myLabels &&
                                 myLabels.map((data) => {
                                 return<div>
-                                    <p>{data.name} <button onClick={() =>handleDelete(data.id)}>Delete</button></p>
+                                    <p>▌{data.name} <button  onClick={() =>handleDelete(data.id)}>Delete</button></p>
                                 </div>
                                 }
                                 )
@@ -123,7 +123,7 @@ const MyLabel = (props) => {
                             myArtists.length ?
                             myArtists.map((data) => {
                             return<div>
-                                <p>{data.name} <button onClick={removeArtist}>Unsign</button></p>
+                                <p>❍{data.name} <button onClick={removeArtist}>Unsign</button></p>
                                 </div>
                                 }
                                 )
@@ -138,6 +138,8 @@ const MyLabel = (props) => {
 
                     <button type="submit" value="submit">delete</button>
                     </form> */}
+
+
             </div>
     )
 }
