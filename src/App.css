@@ -35,9 +35,10 @@ body {
 }
 
 img:hover {
-  transform: scale(1.4) rotate(5deg) skew(3deg);
+  transform: scale(1.2);
   border: 5px solid #60ab9a;
   box-shadow: 2px;
+  box-shadow: 4px 4px 5px rgb(135, 18, 18), -2px -2px 5px grey;
 }
 
 .bio {
