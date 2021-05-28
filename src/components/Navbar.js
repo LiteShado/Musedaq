@@ -29,7 +29,7 @@ const NavBar = (props) => {
 
 
     return(
-        <div className="Nav">
+        <div id="Nav">
         <nav>
         {/* <Link className="Nav" to="/">Home</Link>{' | '} */}
 

@@ -6,7 +6,7 @@ body {
   justify-content: center;
   background-color: rgb(238, 159, 98);
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   background-size: auto 95px;
   background-attachment: fixed;
   background-position: left top;
@@ -222,10 +222,12 @@ input::-moz-placeholder { color: #999999; }
 input:-ms-input-placeholder { color: #999999; }
 
 a {
-  color: #60ab9a;
+  color: rgb(14, 1, 101);
   font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  background-color: rgba(162, 158, 158, 0.166);
+  background-blend-mode: screen, difference, lighten;
   font-size: larger;
-  transition: all 0.4s;
+  transition: all 0.2s;
 	-webkit-transition: all 0.4s;
   -o-transition: all 0.4s;
   -moz-transition: all 0.4s;
@@ -236,6 +238,28 @@ a:focus {
 }
 
 a:hover {
+	text-decoration: none;
+  color: #57b846;
+  background-color: rgb(16, 148, 146);
+  background-blend-mode: lighten;
+
+}
+
+#Nav {
+  color: black;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: larger;
+  transition: all 0.4s;
+	-webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+}
+
+#Nav:focus {
+	outline: none !important;
+}
+
+#Nav:hover {
 	text-decoration: none;
   color: #57b846;
 }
