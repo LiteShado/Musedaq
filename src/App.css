@@ -141,6 +141,9 @@ img:hover {
 .loginContainer,
 .homeContainer {
   background-color: #0acdff;
+  border: 5px solid #60ab9a;
+  box-shadow: 2px;
+  box-shadow: 4px 4px 5px rgb(233, 124, 124), -2px -2px 5px grey;
   color: white;
   font-family: Roboto;
   font-stretch: extra-condensed;

@@ -10,7 +10,7 @@ const LoginPage = (props) => {
                 buttonText="Log In to Musedaq"
                 route="/users/login"
                 log="Login Successful"
-                title="Login to Musedaq"
+                title="| Welcome Back | "
                 />
             </div>
         </div>
