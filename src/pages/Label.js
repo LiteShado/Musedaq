@@ -73,7 +73,7 @@ const MyProfile = (props) => {
     }
 
     return(
-        <div>
+        <div className="background">
 
 
                 <h3>Create Your Label </h3>

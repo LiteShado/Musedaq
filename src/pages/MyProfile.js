@@ -61,7 +61,7 @@ const MyProfile = (props) => {
         // let newPassword = localStorage.getItem('password')
         // let newEmail = localStorage.getItem('email')
         try {
-            
+
             let email = localStorage.getItem('email')
             let ress = await axios.put(`${process.env.REACT_APP_API_URL}/users/edit`, {
                 name: newName,
@@ -103,13 +103,18 @@ const MyProfile = (props) => {
         myLabel.length ?
             myLabel.map((name) => {
         return<div> */}
+        <div className="background">
             <h2>My Profile</h2>
                 <div className="userDetails" key={user.id}>
                                 <h3 className="titles">Name: </h3>
                                 <p>{user.name}</p>
+                                <p>______________</p>
                                 <h3 className="titles">Email: </h3>
                                 <p>{user.email}</p>
+                                <p>______________</p>
+
                                 <h3 className="titles">Labels: </h3>
+
 
             <div>
                 {
@@ -123,6 +128,7 @@ const MyProfile = (props) => {
             :
             <p>{myLabels.name}</p>
             }
+         <p>______________</p>
 
         </div>
                 <h1>Edit Your Profile </h1>
@@ -141,6 +147,7 @@ const MyProfile = (props) => {
                 </form>
 
             </div>
+    </div>
     </div>
     )
 

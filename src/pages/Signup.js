@@ -12,7 +12,7 @@ const Signup = (props) => {
                     buttonText="Sign Up to Musedaq"
                     route="/users"
                     log="Sign Up Successful"
-                    title="sign up"
+                    title="Sign Up to Musedaq"
                     />
 
             </div>

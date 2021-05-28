@@ -33,13 +33,13 @@ const SignupLogin = (props) => {
         <form onSubmit={handleSubmit}>
 
             <label htmlFor="new-name"><h2>name</h2></label>
-            <input value={name} onChange={(e)=> {setName(e.target.value) }} />
+            <input className="signupInput" value={name} onChange={(e)=> {setName(e.target.value) }} />
 
             <label htmlFor="new-email"><h2>email</h2></label>
-            <input value={email} onChange={(e)=> {setEmail(e.target.value) }} />
+            <input className="signupInput" value={email} onChange={(e)=> {setEmail(e.target.value) }} />
 
             <label htmlFor="new-password"><h2>password</h2></label>
-            <input type="password" value={password} onChange={(e)=> {setPassword(e.target.value) }} />
+            <input className="signupInput" type="password" value={password} onChange={(e)=> {setPassword(e.target.value) }} />
 
             <button className="button" id="submit-button" type="submit" value={props.buttonText}><span>submit</span></button>
 

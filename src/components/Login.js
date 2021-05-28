@@ -29,15 +29,15 @@ const Login = (props) => {
     }
 
     return (
-        <div className="signuplogin">
+        <div className="signuplogin container-login100 wrap-login100">
         <h1>{props.title}</h1>
         <form onSubmit={handleSubmit}>
 
             <label htmlFor="new-email"><h2>email</h2></label>
-            <input value={email} onChange={(e)=> {setEmail(e.target.value) }} />
+            <input className="signupInput" value={email} onChange={(e)=> {setEmail(e.target.value) }} />
 
             <label htmlFor="new-password"><h2>password</h2></label>
-            <input type="password" value={password} onChange={(e)=> {setPassword(e.target.value) }} />
+            <input className="signupInput"type="password" value={password} onChange={(e)=> {setPassword(e.target.value) }} />
 
             <button className="button" id="submit-button" type="submit" value={props.buttonText}><span>submit</span></button>
 

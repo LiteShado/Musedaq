@@ -67,7 +67,7 @@ const Artists = (props) => {
                                     <img className="artistPics" src= {artist.image} alt="pic" />
                                     <div>
                                     <p className="titles">Bio: </p>
-                                    <p className="artistBio">Bio: {artist.biograpy}</p>
+                                    <p className="artistBio">{artist.biograpy}</p>
                                     </div>
                                     <p className="titles">Marketplace Price: </p>
                                     <p className="artistPrice">${artist.price}</p>

@@ -92,7 +92,7 @@ const MyLabel = (props) => {
     }
 
     return(
-            <div>
+            <div className="background">
 
                 <h1>My Labels</h1>
                     <div className="userDetails" key={myLabels.id}>

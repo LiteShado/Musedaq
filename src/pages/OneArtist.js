@@ -60,11 +60,11 @@ const OneArtist = (props) => {
             <div>
                 <div className="artistDetails" key={oneArtist.id}>
                     <div key={oneArtist.id}>
-                        <div to={`/artist/${oneArtist.id}`}>
+                        <div className="bio" to={`/artist/${oneArtist.id}`}>
                             <h3>{oneArtist.name}</h3>
                                 <img className="artistPic" src={oneArtist.image} alt="pic" />
                                 <p className="titles">Bio: </p>
-                                <p>{oneArtist.biograpy}</p>
+                                <p className="bio">{oneArtist.biograpy}</p>
                                 <p className="titles">Marketplace Price: </p>
                                 <p>${oneArtist.price}</p>
                                 <p className="titles">Genre: </p>
@@ -78,8 +78,8 @@ const OneArtist = (props) => {
 
                     </div>
 
-                    <button onClick={signArtist} className = "signed">
-                        I wanna sign this artist!</button>
+                    <button className="button" onClick={signArtist}>
+                        Sign This Artist!</button>
                 </div>
             </div>
         </div>
