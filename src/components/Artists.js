@@ -77,8 +77,8 @@ const Artists = (props) => {
                                     </div>
                                     <p className="titles">Rating: </p>
                                     <p>{artist.rating}</p>
-                                    <p className="titles">Label: </p>
-                                    <p>{artist.label}</p>
+                                    {/* <p className="titles">Label: </p>
+                                    <p>{labelTitle}</p> */}
                                     <div className = "divider"> __________________
                                     __________________
                                     </div>

@@ -7,6 +7,7 @@ import axios from 'axios'
 const MyLabel = (props) => {
 
     let id = localStorage.getItem('id')
+    let idd = localStorage.getItem('theLabelId')
 
     const [myLabels,setMyLabels] = useState('')
     const [myArtists,setMyArtists] = useState('')
@@ -31,11 +32,11 @@ const MyLabel = (props) => {
     const fetchArtists= async () =>{
         console.log(id)
         try {
-            let response = await axios.post(`${process.env.REACT_APP_API_URL}/label/mylabel`,{
-                userId: id
+            let response = await axios.post(`${process.env.REACT_APP_API_URL}/artist/roster`,{
+                labelId: idd
             })
             console.log(response)
-            setMyArtists(response.data.userLabel)
+            setMyArtists(response.data.artists)
 
         } catch (error) {
             console.log({error});
@@ -93,8 +94,21 @@ const MyLabel = (props) => {
 
                     <div className="labelDetails" key={myArtists.id}>
                             <h2 className="artists"> My Artists </h2>
+
+                            {
+                            myArtists.length ?
+                            myArtists.map((data) => {
+                            return<div>
+                                <p>{data.name}</p>
+                                </div>
+                                }
+                                )
+                                :
                             <p>{myArtists.name}</p>
+                                }
                     </div>
+
+
                     {/* <h3> Delete My Label </h3>
                     <form onSubmit={handleDelete}>
 

@@ -1,26 +1,29 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-// import Artist from '../components/Artist'
 
 
 const OneArtist = (props) => {
     const [oneArtist, setOneArtist] = useState({})
     const [labelTitle, setLabelTitle] = useState('')
+    const [labelNum, setLabelNum] = useState('')
+    const [oneArtistId, setOneArtistId] = useState('')
 
 
     const fetchArtist = () => {
         axios.get(`${process.env.REACT_APP_API_URL}/artist/${props.id}`).then((res) => {
-
+            console.log(res)
             setOneArtist(res.data.artist)
-            console.log(oneArtist);
-            console.log(oneArtist.labelId)
+            setLabelNum(res.data.artist.labelId)
+            setOneArtistId(res.data.artist.id)
         })
 
     }
 
-    // let id = localStorage.getItem('id')
-    let labelIdNum = oneArtist.labelId
-    let id = labelIdNum
+    let idd = localStorage.getItem('theLabelId')
+    console.log(oneArtistId)
+    console.log(labelNum)
+
+    let id = labelNum
 
     const FetchLabelName = async () => {
         console.log(id)
@@ -28,15 +31,21 @@ const OneArtist = (props) => {
             let response = await axios.post(`${process.env.REACT_APP_API_URL}/label/mylabelname`,{
                 id
             })
-            console.log(response)
             setLabelTitle(response.data.userLabelName.name)
-            console.log(labelTitle)
 
         } catch (error) {
             console.log({error});
         }
     }
-    // useEffect(fetchArtist, [])
+
+    const signArtist = async (e) =>{
+        e.preventDefault()
+        let signn = await axios.put(`${process.env.REACT_APP_API_URL}/artist/signed`, {
+            id: oneArtistId,
+            labelId: idd
+       })
+        console.log(signn)
+    }
 
     useEffect(() => {
         fetchArtist()
@@ -44,19 +53,6 @@ const OneArtist = (props) => {
 }, [])
 
 
-    const signArtist = async (e) =>{
-
-        e.preventDefault()
-        let artistId = oneArtist.id
-        let labelId = localStorage.getItem('labelId')
-
-        let signn = await axios.put(`${process.env.REACT_APP_API_URL}/artist/signed`, {
-           id: artistId,
-           labelId: labelId
-       })
-        // alert('you signed an artist!!');
-        console.log(signn)
-    }
     return(
         <div>
             <h1>Artist Spotlight</h1>
