@@ -109,7 +109,7 @@ function App() {
          if(user.id){
           return <MyLabel />
          } else{
-          return <Redirect to ="/Label" />
+          return <Redirect to ="/label" />
          }
        }}
       />

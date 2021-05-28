@@ -11,7 +11,7 @@ const MyLabel = (props) => {
 
     const [myLabels,setMyLabels] = useState('')
     const [myArtists,setMyArtists] = useState('')
-    console.log(id)
+    const [thisId,setThisId] = useState('')
 
     const fetchLabel= async () =>{
         console.log(id)
@@ -43,28 +43,53 @@ const MyLabel = (props) => {
         }
     }
 
+
     useEffect(() => {
         fetchLabel()
         fetchArtists()
     }, [])
 
+    const removeArtist = async () => {
+        console.log(myArtists.id)
+        try {
+            let resss = await axios.put(`${process.env.REACT_APP_API_URL}/artist/unsign`, {
+            where: {
+                id: myArtists.id
+            }
+        })
+        console.log(resss)
+        localStorage.clear()
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
 
-    // const handleDelete = async () => {
-    //     let userId = localStorage.getItem('userId')
-    //     try {
-    //         let resss = await axios.delete(`${process.env.REACT_APP_API_URL}/label/delete`, {
-    //         headers: {
-    //             authorization: userId
-    //         }
-    //     })
-    //     console.log(resss)
-    //     localStorage.clear()
 
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // }
+    const handleDelete = async () => {
+        let i
+        console.log(myLabels)
+
+        for (i = 0; i<myLabels.length; i++) {
+            console.log(myLabels[i].id)
+            setThisId(myLabels[i].id)
+            let idi = (myLabels[i].id)
+
+        try {
+            console.log(idi)
+            let resss = await axios.delete(`${process.env.REACT_APP_API_URL}/label/delete`, {
+            where: {
+                id: idi
+            }
+        })
+        console.log(resss)
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    }
 
     return(
             <div>
@@ -80,12 +105,12 @@ const MyLabel = (props) => {
                                 myLabels.length ?
                                 myLabels.map((data) => {
                                 return<div>
-                                    <p>{data.name}</p>
+                                    <p>{data.name} <button onClick={handleDelete}>Delete</button></p>
                                 </div>
                                 }
                                 )
                                 :
-                                <p>{myLabels.name}</p>
+                                <p>{myLabels.name} <button onClick={handleDelete} value={thisId}>Delete</button></p>
                                 }
 
                         </div>
@@ -99,7 +124,7 @@ const MyLabel = (props) => {
                             myArtists.length ?
                             myArtists.map((data) => {
                             return<div>
-                                <p>{data.name}</p>
+                                <p>{data.name} <button onClick={removeArtist}>Unsign</button></p>
                                 </div>
                                 }
                                 )

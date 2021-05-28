@@ -50,18 +50,23 @@ const MyProfile = (props) => {
         fetchLabel()
     }, [])
 
+
     const [newName,setNewName] = useState('')
     const [newEmail,setNewEmail] = useState('')
     const [newProfile, setNewProfile] = useState('')
 
     const editSubmit = async (e) => {
-        let newPassword = localStorage.getItem('password')
+        e.preventDefault()
+
+        // let newPassword = localStorage.getItem('password')
         // let newEmail = localStorage.getItem('email')
         try {
+            
+            let email = localStorage.getItem('email')
             let ress = await axios.put(`${process.env.REACT_APP_API_URL}/users/edit`, {
                 name: newName,
-                email: newEmail,
-                password: newPassword
+                email: email
+                // password: newPassword
             })
             setNewProfile(ress)
             console.log(ress)
@@ -122,13 +127,9 @@ const MyProfile = (props) => {
         </div>
                 <h1>Edit Your Profile </h1>
                     <form onSubmit={editSubmit}>
-                        <input name="name" placeholder={name} type="text" value={name} onChange={(e) => setNewName(e.target.value)} />
 
                         <input name="newName" placeholder="New Name" type="text" value={newName} onChange={(e) => setNewName(e.target.value)} />
 
-                        <input name="email" placeholder="Email" type="text" value={email} onChange={(e) => setNewEmail(e.target.value)} />
-
-                        <input name="newEmail" placeholder="New Email" type="text" value={newEmail} onChange={(e) => setNewEmail(e.target.value)} />
 
                         <input type="submit" value="submit" />
                     </form>
